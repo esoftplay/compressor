@@ -1,6 +1,7 @@
 .DS_Store
+Thumbs.db
 dest/
 files.js
 node_modules/
+npm-debug.log
 test/
-Thumbs.db

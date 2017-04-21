@@ -4,9 +4,6 @@ var watch = require('gulp-watch');
 var gutil = require('gulp-util');
 var cssmin = require('gulp-cssmin');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var gulpeval = require('gulp-eval');
-// var compress = require('gulp-compressor');
 
 // Sass Requires
 var sass = require('gulp-sass');                // Include SASS
@@ -60,34 +57,40 @@ gulp.task('fonts', function()
 	return false;
 });
 
-gulp.task('scripts', function()
+gulp.task('scripts', function(cb)
 {
 	var gulpDest = dest+"/js";
 	if (myfiles.js.length > 0)
 	{
+		var compresor;
+		switch(myfiles.jscompress) {
+			case 3:
+				var uinline = require('gulp-uglify-inline');
+				compresor = uinline();
+				break;
+			case 2:
+				var packer = require('gulp-packer')
+		  	var streamify = require('gulp-streamify')
+				compresor = streamify(packer({base62: true, shrink: true}))
+				break;
+			default:
+				var uglify = require('gulp-uglify');
+				compresor = uglify({mangle: true, compress: true, eval: true });
+		}
+
 		return gulp.src(myfiles.js)
 		.pipe(concat('script.js'))
-		// .pipe(gulpeval())
-		// .pipe(compress({type:"js"}))
-		.pipe(uglify({mangle: false, compress: true }))
+		.pipe(compresor)
 		.pipe(gulp.dest(gulpDest));
 	}
 	return false;
 });
 
 gulp.task('watch', function() {
-	for (var i = 0; i < myfiles.css.length; i++) {
-		gulp.watch(myfiles.css[i], ['styles']);
-	}
-	for (var i = 0; i < myfiles.scss.length; i++) {
-		gulp.watch(myfiles.scss[i], ['styles']);
-	}
-	for (var i = 0; i < myfiles.font.length; i++) {
-		gulp.watch(myfiles.font[i], ['fonts']);
-	}
-	for (var i = 0; i < myfiles.js.length; i++) {
-		gulp.watch(myfiles.js[i], ['scripts']);
-	}
+	gulp.watch(myfiles.css, ['styles']);
+	gulp.watch(myfiles.scss, ['styles']);
+	gulp.watch(myfiles.font, ['fonts']);
+	gulp.watch(myfiles.js, ['scripts']);
 });
 
 gulp.task('default', ['styles', 'fonts', 'scripts', 'watch']);
