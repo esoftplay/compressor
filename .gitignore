@@ -1,0 +1,6 @@
+.DS_Store
+dest/
+files.js
+node_modules/
+test/
+Thumbs.db
