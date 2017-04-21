@@ -31,5 +31,5 @@ module.exports = {
 	font: [
 		],
 	destination: "dest",
-	jscompress : 1 // 1=ugify, 2=eval
+	jscompress : 1 // 1=uglify, 2=packer, 3=inline
 }
