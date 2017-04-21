@@ -1,0 +1,66 @@
+'use strict';
+/*
+
+// RELATIVE PATH
+'./test/custom/script-pre.js'
+
+// ALL FILES IN PATH
+'./test/js/*.js'
+
+// ALL FILES IN PATH RECURSIVELY
+'./test/js/** /*.js' // WITH NO SPACE
+
+// ABSOLUTE PATH
+'/Users/me/Sites/compressor/test/custom/script-post.js'
+
+*/
+const bPath = '../php/bootstrap/'
+module.exports = {
+	css: [
+		bPath+'custom/bootstrap-pre.css',
+		bPath+'github/bootstrap/dist/css/bootstrap.css',
+		bPath+'custom/bootstrap-post.css',
+		],
+	scss: [],
+	font: [
+		bPath+'github/bootstrap/fonts/*',
+		bPath+'github/Font-Awesome/fonts/*'
+		],
+	js: [
+		bPath+'custom/bootstrap-pre.js',
+		bPath+'github/bootstrap/docs/assets/js/vendor/jquery.min.js',
+		bPath+'github/bootstrap/dist/js/bootstrap.js',
+		bPath+'custom/bootstrap-post.js',
+		],
+	dest: {
+		path: "/var/www/html/master/templates/admin/bootstrap",
+		css: "bootstrap.min.css",
+		js: "bootstrap.min.js",
+	},
+	jscompress : 1, // 1=uglify, 2=packer, 3=inline
+	copy: {
+		'/css': [
+			bPath+'github/bootstrap/dist/css/bootstrap-theme.min.css',
+			bPath+'github/Font-Awesome/css/font-awesome.min.css',
+			bPath+'css/alert.css',
+			bPath+'css/datepicker.css',
+			bPath+'css/datetimepicker.css',
+			{
+				'colorpicker.css': bPath+'github/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'
+			}
+		],
+		'/js': [
+			bPath+'js/alert.min.js',
+			bPath+'js/datepicker.js',
+			bPath+'js/datetimepicker.js',
+			bPath+'js/rating.js',
+			{
+				'colorpicker.js': bPath+'github/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'
+			}
+		],
+		'/img': [
+			bPath+'img/spinner.gif',
+			bPath+'github/bootstrap-colorpicker/dist/img/**'
+		]
+	},
+}

@@ -12,34 +12,35 @@ var rename = require('gulp-rename');            // Gulp Rename
 var sourcemaps = require('gulp-sourcemaps');    // Sourcemaps (for sass)
 var merge = require('merge2');    							// merging multi src
 
-var myfiles = require('./files');
-var dest = (typeof myfiles.destination=="undefined") ? "dest" : (myfiles.destination=="" ? "dest" : myfiles.destination);
+var config = require('./config');
+var dest = (typeof config.dest.path=="undefined") ? "dest" : (config.dest.path=="" ? "dest" : config.dest.path);
 
 
 
 gulp.task('styles', function()
 {
 	var gulpDest = dest+"/css";
-	if (myfiles.css.length > 0 && myfiles.scss.length > 0)
+	var fileName = config.dest.css||'style.css';
+	if (config.css.length > 0 && config.scss.length > 0)
 	{
-		var cssStream = gulp.src(myfiles.css).pipe(concat('css-files.css'));
-		var scssStream = gulp.src(myfiles.scss).pipe(sass()).pipe(concat('scss-files.css'));
+		var cssStream = gulp.src(config.css).pipe(concat('css-files.css'));
+		var scssStream = gulp.src(config.scss).pipe(sass()).pipe(concat('scss-files.css'));
 		return merge(cssStream, scssStream)
-		.pipe(concat('style.css'))
+		.pipe(concat(fileName))
 		.pipe(cssmin())
 		.pipe(gulp.dest(gulpDest));
 	}else
-	if (myfiles.css.length > 0)
+	if (config.css.length > 0)
 	{
-		return gulp.src(myfiles.css)
-		.pipe(concat('style.css'))
+		return gulp.src(config.css)
+		.pipe(concat(fileName))
 		.pipe(cssmin())
 		.pipe(gulp.dest(gulpDest));
 	}else
-	if (myfiles.scss.length > 0)
+	if (config.scss.length > 0)
 	{
-		return gulp.src(myfiles.css)
-		.pipe(concat('style.css'))
+		return gulp.src(config.css)
+		.pipe(concat(fileName))
 		.pipe(sass())
 		.pipe(cssmin())
 		.pipe(gulp.dest(gulpDest));
@@ -50,9 +51,9 @@ gulp.task('styles', function()
 gulp.task('fonts', function()
 {
 	var gulpDest = dest+"/fonts";
-	if (myfiles.font.length > 0)
+	if (config.font.length > 0)
 	{
-		return gulp.src(myfiles.font).pipe(gulp.dest(gulpDest));
+		return gulp.src(config.font).pipe(gulp.dest(gulpDest));
 	}
 	return false;
 });
@@ -60,10 +61,11 @@ gulp.task('fonts', function()
 gulp.task('scripts', function(cb)
 {
 	var gulpDest = dest+"/js";
-	if (myfiles.js.length > 0)
+	var fileName = config.dest.js||'script.js';
+	if (config.js.length > 0)
 	{
 		var compresor;
-		switch(myfiles.jscompress) {
+		switch(config.jscompress) {
 			case 3:
 				var uinline = require('gulp-uglify-inline');
 				compresor = uinline();
@@ -78,19 +80,49 @@ gulp.task('scripts', function(cb)
 				compresor = uglify({mangle: true, compress: true, eval: true });
 		}
 
-		return gulp.src(myfiles.js)
-		.pipe(concat('script.js'))
+		return gulp.src(config.js)
+		.pipe(concat(fileName))
 		.pipe(compresor)
 		.pipe(gulp.dest(gulpDest));
 	}
 	return false;
 });
 
-gulp.task('watch', function() {
-	gulp.watch(myfiles.css, ['styles']);
-	gulp.watch(myfiles.scss, ['styles']);
-	gulp.watch(myfiles.font, ['fonts']);
-	gulp.watch(myfiles.js, ['scripts']);
+gulp.task('copy', function()
+{
+	if (typeof config.copy!="undefined")
+	{
+		var gulpDest;
+		for (var dir in config.copy)
+		{
+			if (!config.copy.hasOwnProperty(dir)) continue;
+			gulpDest = dest+dir;
+			for(var i in config.copy[dir])
+			{
+				if (!config.copy[dir].hasOwnProperty(i)) continue;
+				if (typeof config.copy[dir][i]=="string")
+				{
+					// console.log([config.copy[dir][i], gulpDest]);
+					gulp.src(config.copy[dir][i]).pipe(gulp.dest(gulpDest));
+				}else{
+					for(var j in config.copy[dir][i])
+					{
+						if (!config.copy[dir][i].hasOwnProperty(j)) continue;
+						// console.log([config.copy[dir][i][j], j]);
+						gulp.src(config.copy[dir][i][j]).pipe(concat(j)).pipe(gulp.dest(gulpDest));
+					}
+				}
+			}
+		}
+	}
+	return false;
 });
 
-gulp.task('default', ['styles', 'fonts', 'scripts', 'watch']);
+gulp.task('watch', function() {
+	gulp.watch(config.css, ['styles']);
+	gulp.watch(config.scss, ['styles']);
+	gulp.watch(config.font, ['fonts']);
+	gulp.watch(config.js, ['scripts']);
+});
+
+gulp.task('default', ['styles', 'fonts', 'scripts', 'copy', 'watch']);
