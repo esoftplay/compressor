@@ -1,10 +1,14 @@
 {
-  "name": "compiler",
+  "name": "compressor-template",
   "version": "1.0.0",
   "description": "buat compiler javascript stylesheet",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:bbc_danang/compressor.git"
   },
   "author": "Danang Widiantoro",
   "license": "MIT",
@@ -20,7 +24,7 @@
     "gulp-packer": "^0.1.1",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "*",
+    "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.3",

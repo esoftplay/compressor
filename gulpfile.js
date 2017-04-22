@@ -1,4 +1,3 @@
-// Essentials
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var gutil = require('gulp-util');
@@ -9,7 +8,6 @@ var uglify = require('gulp-uglify');
 var Packer = require('./packer');
 var streamify = require('gulp-streamify');
 
-// Sass Requires
 var sass = require('gulp-sass');
 var autoprefix = require('gulp-autoprefixer');
 var rename = require('gulp-rename');
