@@ -1,4 +1,4 @@
-how to use it in 7 steps:
+how to use it in 9 steps:
 
 1. install npm (Node Package Manager) = [https://docs.npmjs.com/getting-started/installing-node](Link URL)
 1. install gulp -> `$ npm install --save gulp-install`
