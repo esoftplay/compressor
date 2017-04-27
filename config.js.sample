@@ -1,8 +1,10 @@
 'use strict';
 /*
-
 // RELATIVE PATH
 './test/custom/script-pre.js'
+
+// RELATIVE PATH FROM `source`
+'test/custom/script-pre.js'
 
 // ALL FILES IN PATH
 './test/js/*.js'
@@ -12,59 +14,58 @@
 
 // ABSOLUTE PATH
 '/Users/me/Sites/compressor/test/custom/script-post.js'
-
 */
-const bPath = '../php/bootstrap/'
 module.exports = {
 	css: [
-		bPath+'custom/bootstrap-pre.css',
-		bPath+'github/bootstrap/dist/css/bootstrap.css',
-		bPath+'custom/bootstrap-post.css',
+		"custom/bootstrap-pre.css",
+		"./node_modules/bootstrap/dist/css/bootstrap.css",
+		"custom/bootstrap-post.css"
 		],
 	scss: [],
 	font: [
-		bPath+'github/bootstrap/fonts/*',
-		bPath+'github/Font-Awesome/fonts/*'
+		"./node_modules/bootstrap/fonts/*",
+		"github/Font-Awesome/fonts/*"
 		],
 	js: [
-		bPath+'custom/bootstrap-pre.js',
-		bPath+'github/bootstrap/docs/assets/js/vendor/jquery.min.js',
-		bPath+'github/bootstrap/dist/js/bootstrap.js',
-		bPath+'custom/bootstrap-post.js',
+		"custom/bootstrap-pre.js",
+		"custom/jquery.min.js",
+		"./node_modules/bootstrap/dist/js/bootstrap.js",
+		"custom/bootstrap-post.js",
 		],
 	copy: {
-		'/css': [
-			bPath+'css/alert.css',
-			bPath+'css/datepicker.css',
-			bPath+'css/datetimepicker.css',
+		"/css": [
+			// COPY ONLY
+			"css/alert.css",
+			"css/datepicker.css",
+			"css/datetimepicker.css",
+			// COPY AND COMPRESS
 			{
-				'bootstrap-theme.min.css': bPath+'github/bootstrap/dist/css/bootstrap-theme.css'
-			},
-			{
-				'font-awesome.min.css': bPath+'github/Font-Awesome/css/font-awesome.css'
-			},
-			{
-				'colorpicker.css': bPath+'github/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css'
+				"bootstrap-theme.min.css": "./node_modules/bootstrap/dist/css/bootstrap-theme.css",
+				"font-awesome.min.css": "github/Font-Awesome/css/font-awesome.css",
+				"colorpicker.css": "github/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css"
 			}
 		],
-		'/js': [
-			bPath+'js/alert.min.js',
-			bPath+'js/datepicker.js',
-			bPath+'js/datetimepicker.js',
-			bPath+'js/rating.js',
+		"/js": [
+			// COPY ONLY
+			"js/alert.js",
+			"js/datepicker.js",
+			"js/datetimepicker.js",
+			"js/rating.js",
+			// COPY AND COMPRESS
 			{
-				'colorpicker.js': bPath+'github/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js'
+				"colorpicker.js": "github/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"
 			}
 		],
-		'/img': [
-			bPath+'img/spinner.gif',
-			bPath+'github/bootstrap-colorpicker/dist/img/**'
+		"/img": [
+			"img/spinner.gif",
+			"github/bootstrap-colorpicker/dist/img/**"
 		]
 	},
+	source: "/Users/me/Sites/php/bootstrap/",
 	dest: {
-		path: "/private/var/www/html/master/templates/admin/bootstrap",
+		path: "/var/www/html/master/templates/admin/bootstrap/",
 		css: "bootstrap.min.css",
-		js: "bootstrap.min.js",
+		js: "bootstrap.min.js"
 	},
 	jscompress : 2 // 1=uglify, 2=packer
 }
