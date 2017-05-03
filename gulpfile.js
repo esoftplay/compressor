@@ -86,7 +86,7 @@ var Execute = function(cb, files, dest, type, name=null) {
 				break;
 		}
 		tasks.push(gulp.dest(dest));
-		pump(tasks);
+		pump(tasks, cb);
 	}else{
 		files.pipe(gulp.dest(dest));
 	}
