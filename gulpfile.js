@@ -17,6 +17,7 @@ var merge = require('merge2');
 
 var config = require('./config');
 var dest = (typeof config.dest.path=="undefined") ? "dest" : (config.dest.path=="" ? "dest" : config.dest.path);
+var watcher = (typeof config.watch=="undefined") ? 0 : config.watch;
 
 var getExt = function(filename) {
 	var match = /\.([^\.]+)$/.exec(filename);
@@ -86,7 +87,11 @@ var Execute = function(cb, files, dest, type, name=null) {
 				break;
 		}
 		tasks.push(gulp.dest(dest));
-		pump(tasks, cb);
+		if (watcher) {
+			pump(tasks, cb);
+		}else{
+			pump(tasks);
+		}
 	}else{
 		files.pipe(gulp.dest(dest));
 	}
@@ -145,10 +150,12 @@ gulp.task('copy', function(cb) {
 	return false;
 });
 gulp.task('watch', function() {
-	gulp.watch(config.css, ['styles']);
-	gulp.watch(config.scss, ['styles']);
-	gulp.watch(config.font, ['fonts']);
-	gulp.watch(config.js, ['scripts']);
+	if (watcher) {
+		gulp.watch(config.css, ['styles']);
+		gulp.watch(config.scss, ['styles']);
+		gulp.watch(config.font, ['fonts']);
+		gulp.watch(config.js, ['scripts']);
+	}
 });
 
 gulp.task('default', ['styles', 'fonts', 'scripts', 'copy', 'watch']);
