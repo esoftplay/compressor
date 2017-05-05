@@ -15,6 +15,10 @@
 // ABSOLUTE PATH
 '/Users/me/Sites/compressor/test/custom/script-post.js'
 */
+module.exports = require('/var/www/html/master/templates/admin/config.js');
+
+/* ATAU BISA MENENTUKAN LANGSUNG SEPERTI DI BAWAH */
+
 module.exports = {
 	css: [
 		"custom/bootstrap-pre.css",
