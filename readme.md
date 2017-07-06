@@ -1,6 +1,6 @@
 how to use it in 10 steps:
 
-1. install npm (Node Package Manager) = [https://docs.npmjs.com/getting-started/installing-node](Link URL)
+1. install npm (Node Package Manager) = [https://docs.npmjs.com/getting-started/installing-node](https://docs.npmjs.com/getting-started/installing-node)
 1. install gulp -> `$ npm install --save gulp-install`
 1. change directory to this doc_root
 1. execute `$ npm install`
@@ -10,3 +10,6 @@ how to use it in 10 steps:
 1. create file named 'config.js' like 'config.js.sample'
 1. specify all files and path in 'config.js'
 1. execute command `$ gulp`
+
+
+> PS: symbol '$' means you have to run the command in terminal as your curent user (not root)
