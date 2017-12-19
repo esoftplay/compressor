@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:bbc_danang/compressor.git"
+    "url": "https://github.com/esoftplay/compressor.git"
   },
   "author": "Danang Widiantoro",
   "license": "MIT",
