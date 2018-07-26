@@ -1,7 +1,8 @@
 .DS_Store
-Thumbs.db
-dest/
 config.js
+dest/
 node_modules/
 npm-debug.log
+package-lock.json
 test/
+Thumbs.db
