@@ -14,7 +14,7 @@ module.exports = function (opt) {
     var str = file.contents.toString('utf8')
       , data = packer.pack(str, opt.base62, opt.shrink)
 
-    file.contents = new Buffer(data)
+    file.contents = Buffer.from(data)
 
     this.emit('data', file)
   }
