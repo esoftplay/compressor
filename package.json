@@ -1,38 +1,35 @@
 {
-  "name": "compressor-template",
-  "version": "1.0.0",
-  "description": "buat compiler javascript stylesheet",
+  "name": "esoftplay-pack",
+  "version": "0.1.1",
+  "description": "CLI command to compress javascript, css, scss at once. Support auto recompress on any changes",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/esoftplay/compressor.git"
+    "url": "git+https://github.com/esoftplay/compressor.git"
   },
-  "author": "Danang Widiantoro",
-  "license": "MIT",
-  "dependencies": {
-    "bootstrap": "^3.3.7",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-clean": "^0.3.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-cssmin": "^0.1.7",
-    "gulp-declare": "^0.3.0",
-    "gulp-eval": "^1.0.0",
-    "gulp-imagemin": "^2.4.0",
-    "gulp-packer": "^0.1.1",
-    "gulp-plumber": "^1.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-streamify": "^1.0.2",
-    "gulp-uglify": "^1.5.3",
-    "gulp-util": "^3.0.7",
-    "gulp-watch": "^4.3.11",
-    "jsdom": "^9.12.0",
-    "merge2": "^1.0.3",
-    "pump": "^1.0.2"
-  }
+  "keywords": [
+    "compressor",
+    "js packer",
+    "css packer",
+    "javascript compressor",
+    "css compressor",
+    "scss compressor"
+  ],
+  "author": "Danang Widiantoro <danang@fisip.net>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/esoftplay/compressor/issues"
+  },
+  "bin": {
+    "pack": "index.js"
+  },
+  "homepage": "https://github.com/esoftplay/compressor#readme",
+  "bundleDependencies": [
+    "jsdom",
+    "ncp",
+    "uglify-js",
+    "uglifycss"
+  ],
+  "dependencies": false
 }
