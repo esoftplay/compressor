@@ -34,6 +34,7 @@ this will result cssfilename.min.css :
 ## options
 * no-option     = You can use this command in any directory with `config.js` file inside, so you don't need to use any argument
 * -c --compress = Deep compression method to optimize the size, make sure the code is clean with no errors
+* -u --unpack   = Unpack the compress file which is already compressed. only work for single file per command
 * -w --watch    = Watch for changes on sources, the packer will be executed each time the file is accessed
 * -h --help     = Display help
 

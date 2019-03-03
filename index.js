@@ -13,6 +13,7 @@ var info = require("./package.json");
 program
   .version(info.name + " v" + info.version)
   .option('-c, --compress', 'Deep compression method to optimize the size, make sure the code is clean with no errors')
+  .option('-u, --unpack', 'Unpack the compress file which is already compressed. only work for single file per command')
   .option('-w, --watch', 'Watch for changes on sources, the compressor will be executed each time the file is accessed')
   .parse(process.argv);
 if (program.compress) {
@@ -26,12 +27,22 @@ var fl1= args[0]||Dir+"config.js"
 var fl2= args[1]||""
 var file1 = /^\//.test(fl1) ? fl1 : Dir+fl1;
 if (fl2=="./") {
-	var file2 = file1.replace(/(\.[^\.]+)$/, '.min$1')
+	if (program.unpack) {
+		var file2 = file1.replace(/(\.min\.)/, '.')
+	}else{
+		var file2 = file1.replace(/(\.[^\.]+)$/, '.min$1')
+	}
 }else{
 	var file2 = fl2=="" ? "" : (/^\//.test(fl2) ? fl2 : Dir+fl2);
+	if (file2 && file2.substr(-1)=="/") {
+		var m = file1.match("([^/]+)$");
+		if (m[1]) {
+			file2 += m[1];
+		}
+	}
 }
-var Out = "";
 
+var Out = "";
 if (/config\.js$/.test(file1)) {
 	if (!fs.existsSync(file1)) {
 		if (file1==Dir+"config.js") {
@@ -39,6 +50,9 @@ if (/config\.js$/.test(file1)) {
 		}else{
 			console.error("sorry, '"+file1+"' is not found!!")
 		}
+	}else
+	if(program.unpack){
+		console.error("option --unpack is only work for single file not for config.js!!")
 	}else{
 		Dir = file1.replace(/config\.js$/, '');
 		const def = {css:[],scss:[],font:[],js:[],copy:{},source:Dir,dest:{path:Dir,css:"style.css",js:"script.js"},jscompress:jsCompress,watch:0};
@@ -79,7 +93,7 @@ if (/config\.js$/.test(file1)) {
 	}
 }else
 if (fs.existsSync(file1)) {
-	exec_file(file1, file2, jsCompress, Dir);
+	exec_file(file1, file2, Dir, program.unpack, jsCompress);
 	if (isWatch) {
 		fs.watch(file1, {
 			persistent: true,
@@ -92,7 +106,7 @@ if (fs.existsSync(file1)) {
 				filename = "some files have been";
 			}
 			console.warn(filename+" "+eventType);
-			exec_file(file1, file2, jsCompress, Dir);
+			exec_file(file1, file2, Dir, program.unpack, jsCompress);
 		});
 	}
 }else{
