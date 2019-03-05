@@ -3,7 +3,7 @@ CLI command to compress javascript, css, scss at once. Based on json file to map
 
 ## how to install
 1. install npm (Node Package Manager) = [https://docs.npmjs.com/getting-started/installing-node]
-1. install this package `npm install -g esoftplay-packer`
+1. install this package `npm install -g esoftplay-pack`
 
 ## how to use
 You have to use terminal, see the usage example below:
