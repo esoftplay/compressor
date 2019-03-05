@@ -1,6 +1,6 @@
 {
   "name": "esoftplay-pack",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "CLI command to compress javascript, css, scss at once. Support auto recompress on any changes",
   "main": "index.js",
   "scripts": {},
