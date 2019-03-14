@@ -77,11 +77,11 @@ if (/config\.js$/.test(file1)) {
 			var options = {persistent: true, recursive: false, encoding: 'utf8'};
 			var reconfig = function(eventType, filename) {
 				if(filename) {
-					filename += " has been";
+					// filename += " has been";
 				}else{
-					filename = "some files have been";
+					filename = "some files";
 				}
-				console.warn(filename+" "+eventType);
+				console.warn("-- "+filename+" -> "+eventType+" --");
 				exec_config(cfg, Dir);
 			};
 			for (var i = 0; i < files.length; i++) {
