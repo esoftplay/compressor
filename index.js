@@ -101,11 +101,11 @@ if (fs.existsSync(file1)) {
 			encoding: 'utf8'
 		}, (eventType, filename) => {
 			if(filename) {
-				filename += " has been";
+				// filename += " has been";
 			}else{
-				filename = "some files have been";
+				filename = "some files";
 			}
-			console.warn(filename+" "+eventType);
+			console.warn("-- "+filename+" -> "+eventType+" --");
 			exec_file(file1, file2, Dir, program.unpack, jsCompress);
 		});
 	}
