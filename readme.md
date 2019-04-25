@@ -47,6 +47,7 @@ this will result cssfilename.min.css :
 			js: "script.min.js" // specify the compressed filename of js files then save the file in dest.path + "jss/", default value is 'script.js'
 		},
 		jscompress : 2, // 1=uglify, 2=packer (compression method)
+		jsnocheck : 0, // 1=direct compress, 0=check before compress
 		watch : 0, // 1=Watch for changes, 0=Exit after compress
 		css: [ // retrieve all css along with scss files to compress into one single file as name which is determine in dest.path+"css/"+dest.css
 			"relatif/path/to/style1.css",

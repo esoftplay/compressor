@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const read_file = require('./lib/read_file');
 const exec_config = require('./lib/exec_config');
 const exec_file = require('./lib/exec_file');
 var Dir = process.cwd()+"/";
@@ -12,10 +13,18 @@ var info = require("./package.json");
 
 program
   .version(info.name + " v" + info.version)
+  .usage('[options] [source] [destination]')
+  .description('CLI command to compress javascript, css, scss at once. Based on json file to map which files to compress and where to save the result')
+  .on('--help', function(){
+	  console.log('')
+	  console.log('  Readme:');
+	  console.log(fs.readFileSync(__dirname+'/readme.md', "utf8").replace(/^.*?## how to use/s, '## how to use').replace(/## options.*?#/s, '#'));
+	})
   .option('-c, --compress', 'Deep compression method to optimize the size, make sure the code is clean with no errors')
   .option('-u, --unpack', 'Unpack the compress file which is already compressed. only work for single file per command')
   .option('-w, --watch', 'Watch for changes on sources, the compressor will be executed each time the file is accessed')
   .parse(process.argv);
+
 if (program.compress) {
 	jsCompress = 2;
 }
