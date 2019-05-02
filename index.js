@@ -92,7 +92,7 @@ if (/config\.js$/.test(file1)) {
 				}
 				console.warn("-- "+filename+" -> "+eventType+" --");
 				exec_config(cfg, Dir);
-				console.log("..done")
+				console.log("..DONE")
 			};
 			for (var i = 0; i < files.length; i++) {
 				path = files[i];
@@ -117,7 +117,7 @@ if (fs.existsSync(file1)) {
 			}
 			console.warn("-- "+filename+" -> "+eventType+" --");
 			exec_file(file1, file2, Dir, program.unpack, jsCompress);
-			console.log("..done")
+			console.log("..DONE")
 		});
 	}
 }else{
