@@ -49,6 +49,10 @@ this will result cssfilename.min.css :
 		jscompress : 2, // 1=uglify, 2=packer (compression method)
 		jsnocheck : 0, // 1=direct compress, 0=check before compress
 		watch : 0, // 1=Watch for changes, 0=Exit after compress
+		script: { // additional code to execute before or after execution http://dev.esoftplay.com/file-compressor.html#scripts
+			code: "", // what script to execute
+			file: ""  // filename to execute
+		}
 		css: [ // retrieve all css along with scss files to compress into one single file as name which is determine in dest.path+"css/"+dest.css
 			"relatif/path/to/style1.css",
 			"./relatif/path/to/style2.css", // you can also use ../../ to point which file you want to process
