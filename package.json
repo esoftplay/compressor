@@ -1,6 +1,6 @@
 {
   "name": "esoftplay-packer",
-  "version": "0.0.1d",
+  "version": "0.0.2",
   "description": "CLI command to compress javascript, css, scss at once. Support auto recompress on any changes",
   "main": "index.js",
   "scripts": {},
@@ -28,6 +28,7 @@
   "bundleDependencies": [
     "jsdom",
     "ncp",
+    "node-sass",
     "uglify-js",
     "uglifycss"
   ],
